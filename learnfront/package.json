@@ -8,5 +8,8 @@
   },
   "peerDependencies": {
     "typescript": "^7"
+  },
+  "dependencies": {
+    "vite": "^8.2.2"
   }
 }
