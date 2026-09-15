@@ -1,4 +1,8 @@
-body{
-background-color: black;
-color: wheat;
+
+@use "bulma/sass" with (
+  $body-background-color: hsl(197, 76%, 53%)
+);
+
+body {
+  color: #222;
 }
