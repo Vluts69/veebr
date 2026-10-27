@@ -1,8 +1,20 @@
 
-@use "bulma/sass" with (
-  $body-background-color: hsl(197, 98%, 22%)
-);
+@use "bulma/sass";
 
 body {
-  color: #f1e9e9;
+  background-color: #f4f7fb;
+  color: #222;
+  min-height: 100vh;
+}
+
+h1, h2 {
+  color: #222;
+}
+
+button {
+  cursor: pointer;
+}
+
+#app {
+  padding: 20px;
 }
