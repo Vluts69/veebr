@@ -53,3 +53,78 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.item-list {
+  margin-bottom: 1.5rem;
+}
+
+.item-list h2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  border-left: 6px solid transparent;
+  color: #7a790a;
+}
+
+.item label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.item.done .text {
+  text-decoration: line-through;
+  opacity: 0.65;
+}
+
+/* Kõrge olulisus - punane */
+.imp-3 {
+  background: #ffebee;
+  border-left-color: #c62828;
+}
+
+/* Keskmine olulisus - kollane */
+.imp-2 {
+  background: #fff8e1;
+  border-left-color: #f9a825;
+}
+
+/* Madal olulisus - roheline */
+.imp-1 {
+  background: #e8f5e9;
+  border-left-color: #2e7d32;
+}
+
+.importance-select {
+  margin-left: auto;
+  padding: 0.3rem;
+  border-radius: 4px;
+}
+
+.remove-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #bcf17f;
+}
+
+.remove-btn:hover {
+  color: #c62828;
+}
+</style>

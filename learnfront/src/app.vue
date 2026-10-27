@@ -1,4 +1,56 @@
 
+<template>
+  <main class="container">
+    <h1 class="title">Ostunimekiri / ToDo</h1>
+
+    <form class="add-form" @submit.prevent="addItem">
+      <input
+        v-model="newText"
+        class="input"
+        placeholder="Lisa uus asi..."
+      />
+
+      <div class="select">
+        <select v-model.number="newImportance">
+          <option :value="1">1 – Madal</option>
+          <option :value="2">2 – Keskmine</option>
+          <option :value="3">3 – Kõrge</option>
+        </select>
+      </div>
+
+      <button type="submit" class="button is-primary">
+        Lisa
+      </button>
+    </form>
+
+    <ItemList
+      title="All items"
+      :items="items"
+      @toggle="toggleDone"
+      @remove="removeItem"
+      @set-importance="setImportance"
+    />
+
+    <ItemList
+      title="Done items"
+      :items="doneItems"
+      @toggle="toggleDone"
+      @remove="removeItem"
+      @set-importance="setImportance"
+    />
+
+    <ItemList
+      title="ToDo items"
+      :items="todoItems"
+      @toggle="toggleDone"
+      @remove="removeItem"
+      @set-importance="setImportance"
+    />
+  </main>
+</template>
+
+
+
 <script>
 import ItemList from './ItemList.vue';
 
