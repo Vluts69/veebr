@@ -92,19 +92,19 @@ ul {
   opacity: 0.65;
 }
 
-/* Kõrge olulisus - punane */
+
 .imp-3 {
   background: #ffebee;
   border-left-color: #c62828;
 }
 
-/* Keskmine olulisus - kollane */
+
 .imp-2 {
   background: #fff8e1;
   border-left-color: #f9a825;
 }
 
-/* Madal olulisus - roheline */
+
 .imp-1 {
   background: #e8f5e9;
   border-left-color: #2e7d32;
