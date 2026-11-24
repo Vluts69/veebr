@@ -27,12 +27,48 @@
         </select>
 
         <button @click="$emit('remove', item.id)" class="remove-btn">×</button>
+
+
+
+
+
+
+
+
+
+
+
+
+           <h1>{{ title }}</h1>
+    <ul>
+        <li v-for="item in items" :key="item.id">
+            {{ item.text }}
+            <input type="checkbox" v-model="item.isDone">
+        </li>
+    </ul>
       </li>
     </ul>
   </div>
 </template>
 
+
+
+
+
+
 <script>
+
+defineProps(['items', 'title']);
+
+
+
+
+
+
+
+
+
+
 export default {
   name: 'ItemList',
   props: {

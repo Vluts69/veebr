@@ -1,43 +1,109 @@
-<script setup>
-import { computed, ref } from 'vue';
-import ItemList from '../components/ItemList.vue';
-
-let message = ref('');
-let i = 1;
-let items = ref([
-    { id: i++, text: 'Piim', isDone: false },
-    { id: i++, text: 'Viin', isDone: true },
-    { id: i++, text: 'Õlu', isDone: false },
-    { id: i++, text: 'Sai', isDone: true },
-]);
-
-function add() {
-    if (message.value.trim() !== '') {
-        items.value.push({ id: i++, text: message.value.trim(), isDone: false });
-    }
-    message.value = '';
-}
-
-let doneItems = computed(() => items.value.filter(item => item.isDone));
-let toDoItems = computed(() => items.value.filter(item => !item.isDone));
-</script>
 
 <template>
+  <main class="container">
+    <h1 class="title">Ostunimekiri / ToDo</h1>
 
-    <div class="field has-addons">
-        <div class="control is-expanded">
-            <input @keydown.enter="add" v-model="message" class="input" type="text" placeholder="Add item">
-        </div>
-        <div class="control">
-            <button @click="add" class="button is-info">
-                Add
-            </button>
-        </div>
-    </div>
+    <form class="add-form" @submit.prevent="addItem">
+      <input
+        v-model="newText"
+        class="input"
+        placeholder="Lisa uus asi..."
+      />
 
-    <ItemList :items="items" title="All items"></ItemList>
-    <ItemList :items="doneItems" title="Done items"></ItemList>
-    <ItemList :items="toDoItems" title="ToDo items"></ItemList>
+      <div class="select">
+        <select v-model.number="newImportance">
+          <option :value="1">1 – Madal</option>
+          <option :value="2">2 – Keskmine</option>
+          <option :value="3">3 – Kõrge</option>
+        </select>
+      </div>
+
+      <button type="submit" class="button is-primary">
+        Lisa
+      </button>
+    </form>
+
+    <ItemList
+      title="All items"
+      :items="items"
+      @toggle="toggleDone"
+      @remove="removeItem"
+      @set-importance="setImportance"
+    />
+
+    <ItemList
+      title="Done items"
+      :items="doneItems"
+      @toggle="toggleDone"
+      @remove="removeItem"
+      @set-importance="setImportance"
+    />
+
+    <ItemList
+      title="ToDo items"
+      :items="todoItems"
+      @toggle="toggleDone"
+      @remove="removeItem"
+      @set-importance="setImportance"
+    />
+  </main>
 </template>
 
-<style></style>
+
+
+<script>
+import ItemList from '../components/ItemList.vue';
+
+export default {
+  name: 'App',
+  components: { ItemList },
+  data() {
+    return {
+      nextId: 4,
+      newText: '',
+      newImportance: 2,
+      items: [
+        { id: 1, text: 'Piim', isDone: false, importance: 3 },
+        { id: 2, text: 'Leib', isDone: true, importance: 1 },
+        { id: 3, text: 'Munad', isDone: false, importance: 2 }
+      ]
+    };
+  },
+  computed: {
+    doneItems() {
+      return this.items.filter(i => i.isDone);
+    },
+    todoItems() {
+      return this.items.filter(i => !i.isDone);
+    }
+  },
+  methods: {
+    addItem() {
+      const text = this.newText.trim();
+      if (!text) return;
+
+      this.items.push({
+        id: this.nextId++,
+        text,
+        isDone: false,
+        importance: this.newImportance
+      });
+
+      this.newText = '';
+      this.newImportance = 2;
+    },
+    toggleDone(id) {
+      const item = this.items.find(i => i.id === id);
+      if (item) item.isDone = !item.isDone;
+    },
+    removeItem(id) {
+      this.items = this.items.filter(i => i.id !== id);
+    },
+    setImportance(id, level) {
+      const item = this.items.find(i => i.id === id);
+      if (item) item.importance = level;
+    }
+  }
+};
+</script>
+
